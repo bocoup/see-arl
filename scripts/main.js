@@ -29,6 +29,9 @@
 		['April', 'r3'],
 		['Wilto', 'l']
 	];
+
+	require.config({ paths: { "jquery": "//code.jquery.com/jquery" } });
+
 	var moduleIds = assignments.map(function(assignment) {
 		return 'letters/' + assignment[1];
 	});

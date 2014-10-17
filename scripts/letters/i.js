@@ -1,4 +1,3 @@
-require.config({ paths: { 'jquery': 'http://code.jquery.com/jquery' } });
 define(function(require) {
 	var $ = require('jquery').noConflict();
 
