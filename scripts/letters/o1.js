@@ -1,17 +1,28 @@
 define(function() {
 	return function(elem) {
+    // Initialize the container element.
+    var elemSize = 150;
+    elem.style.width = elem.style.height = elemSize + 'px';
+    elem.style.verticalAlign = 'middle';
+    elem.style.position = 'relative';
+    // Initialize the canvas.
     var canvas = document.createElement('canvas');
     elem.appendChild(canvas);
-    elem.style.verticalAlign = 'middle';
+    canvas.style.position = 'absolute';
+    canvas.style.zIndex = -99999;
+    canvas.style.background = '#fff';
     var c = canvas.getContext('2d');
     var count = 0;
     var size, half;
-    // Set the canvas size.
+    // Set the canvas size and center it in the parent container.
     function setSize(s) {
       size = canvas.width = canvas.height = s;
       half = size / 2;
+      var offset = (elemSize - size) / 2;
+      canvas.style.top = offset + 'px';
+      canvas.style.left = offset + 'px';
     }
-    setSize(150);
+    setSize(elemSize);
     // Get a HSLa string with optional hue offset.
     function getHSLa(offset) {
       var hue = count % 360 + (offset || 0);
@@ -64,7 +75,7 @@ define(function() {
     }
     // Resize canvas on mouse enter/leave.
     elem.addEventListener('mouseenter', function(event) { resizeTo = 800; }, false);
-    elem.addEventListener('mouseleave', function(event) { resizeTo = 150; }, false);
+    elem.addEventListener('mouseleave', function(event) { resizeTo = elemSize; }, false);
     // Loop!
     (function loopy(){
       requestAnimationFrame(loopy);
